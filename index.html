@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Expo 2026 — Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <span class="wordmark">AI Expo</span>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>AI Expo 2026</h1>
+      <p class="tagline">Build. Exhibit. Compete.</p>
+      <p class="lede">
+        A student AI exhibition for school and college teams. Bring a working
+        project, present it to reviewers, and register below —
+        registration takes about five minutes.
+      </p>
+    </div>
+
+    <dl class="title-block" aria-label="Registration summary">
+      <div><dt>Doc</dt><dd>Registration</dd></div>
+      <div><dt>Status</dt><dd>Open</dd></div>
+      <div><dt>Eligible</dt><dd>School, College</dd></div>
+      <div><dt>Team size</dt><dd>1–3</dd></div>
+      <div><dt>Entries</dt><dd>Unlimited / institution</dd></div>
+      <div><dt>Rev</dt><dd>A</dd></div>
+    </dl>
+  </section>
+
+  <section class="eligibility">
+    <h2>Who can apply</h2>
+    <div class="eligibility-grid">
+      <div>
+        <h3>School</h3>
+        <p>Any school may enter. A single school can register as many teams
+        as it likes, each made up of one to three students. A teacher or
+        coordinator submits the form on the team's behalf.</p>
+      </div>
+      <div>
+        <h3>College</h3>
+        <p>Any college or university may enter, under the same rules —
+        unlimited teams per institution, one to three students per team.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="register">
+    <h2>Register a team</h2>
+    <p class="form-note">
+      Fill this in once per team. Registering more than one team from the
+      same school or college? Submit it again for each team.
+    </p>
+
+    <form id="registration-form" novalidate>
+
+      <fieldset>
+        <legend><span class="section-no">01</span> Entrant</legend>
+
+        <div class="field">
+          <span class="field-label">Category</span>
+          <div class="radio-row">
+            <label><input type="radio" name="category" value="School" required> School</label>
+            <label><input type="radio" name="category" value="College"> College</label>
+          </div>
+          <p class="field-error" data-error-for="category" hidden>Choose a category.</p>
+        </div>
+
+        <div class="field">
+          <label for="institution">School or college name</label>
+          <input type="text" id="institution" name="institution" required autocomplete="organization">
+          <p class="field-error" data-error-for="institution" hidden>Required.</p>
+        </div>
+
+        <div class="field">
+          <label for="teamName">Team name</label>
+          <input type="text" id="teamName" name="teamName" required>
+          <p class="field-error" data-error-for="teamName" hidden>Required.</p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="section-no">02</span> Team <span class="legend-hint">(up to 3 students)</span></legend>
+
+        <div class="member-row">
+          <div class="field">
+            <label for="m1name">Student 1 — name</label>
+            <input type="text" id="m1name" name="member1Name" required>
+            <p class="field-error" data-error-for="member1Name" hidden>Required.</p>
+          </div>
+          <div class="field field-narrow">
+            <label for="m1grade">Grade / year</label>
+            <input type="text" id="m1grade" name="member1Grade" required>
+            <p class="field-error" data-error-for="member1Grade" hidden>Required.</p>
+          </div>
+        </div>
+
+        <div class="member-row">
+          <div class="field">
+            <label for="m2name">Student 2 — name <span class="optional">optional</span></label>
+            <input type="text" id="m2name" name="member2Name">
+          </div>
+          <div class="field field-narrow">
+            <label for="m2grade">Grade / year</label>
+            <input type="text" id="m2grade" name="member2Grade">
+          </div>
+        </div>
+
+        <div class="member-row">
+          <div class="field">
+            <label for="m3name">Student 3 — name <span class="optional">optional</span></label>
+            <input type="text" id="m3name" name="member3Name">
+          </div>
+          <div class="field field-narrow">
+            <label for="m3grade">Grade / year</label>
+            <input type="text" id="m3grade" name="member3Grade">
+          </div>
+        </div>
+
+        <div class="member-row">
+          <div class="field">
+            <label for="coordEmail">Coordinator / teacher email</label>
+            <input type="email" id="coordEmail" name="coordEmail" required>
+            <p class="field-error" data-error-for="coordEmail" hidden>Enter a valid email.</p>
+          </div>
+          <div class="field">
+            <label for="coordPhone">Coordinator / teacher phone</label>
+            <input type="tel" id="coordPhone" name="coordPhone" required>
+            <p class="field-error" data-error-for="coordPhone" hidden>Enter a valid phone number.</p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="section-no">03</span> Project</legend>
+
+        <div class="field">
+          <label for="projectTitle">Project title</label>
+          <input type="text" id="projectTitle" name="projectTitle" required>
+          <p class="field-error" data-error-for="projectTitle" hidden>Required.</p>
+        </div>
+
+        <div class="field">
+          <label for="abstract">Abstract <span class="hint">— what the project does, in a few sentences</span></label>
+          <textarea id="abstract" name="abstract" rows="3" required></textarea>
+          <p class="field-error" data-error-for="abstract" hidden>Required.</p>
+        </div>
+
+        <div class="field">
+          <label for="problem">Problem it addresses</label>
+          <textarea id="problem" name="problem" rows="3" required></textarea>
+          <p class="field-error" data-error-for="problem" hidden>Required.</p>
+        </div>
+
+        <div class="field">
+          <label for="aiTools">AI tools / techniques used</label>
+          <input type="text" id="aiTools" name="aiTools" required placeholder="e.g. computer vision, a fine-tuned classifier, an LLM agent">
+          <p class="field-error" data-error-for="aiTools" hidden>Required.</p>
+        </div>
+
+        <div class="field">
+          <label for="link">Link <span class="optional">optional — GitHub, slides, or a video</span></label>
+          <input type="url" id="link" name="link" placeholder="https://">
+        </div>
+      </fieldset>
+
+      <div class="submit-row">
+        <button type="submit" id="submit-btn">Submit registration</button>
+        <p id="form-status" role="status" aria-live="polite"></p>
+      </div>
+
+    </form>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Entries are reviewed by the AI Expo committee.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
