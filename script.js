@@ -4,16 +4,37 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpUp4KpYYiTwtM
 const form = document.getElementById("registration-form");
 const statusEl = document.getElementById("form-status");
 const submitBtn = document.getElementById("submit-btn");
+const coordinatorFields = document.getElementById("coordinator-fields");
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[0-9+()\-\s]{7,20}$/;
 
-const REQUIRED = [
+const BASE_REQUIRED = [
   "category", "institution", "teamName",
   "member1Name", "member1Grade",
-  "coordEmail", "coordPhone",
   "projectTitle", "abstract", "problem", "aiTools",
 ];
+const COORDINATOR_FIELDS = ["coordName", "coordEmail", "coordPhone"];
+
+function currentCategory() {
+  return form.querySelector('input[name="category"]:checked')?.value || "";
+}
+
+// School teams need a coordinator on record; college teams register themselves.
+function syncCoordinatorFields() {
+  const isSchool = currentCategory() === "School";
+  coordinatorFields.hidden = !isSchool;
+  if (!isSchool) {
+    for (const name of COORDINATOR_FIELDS) {
+      form.querySelector(`[name="${name}"]`).value = "";
+      setError(name, false);
+    }
+  }
+}
+
+form.querySelectorAll('input[name="category"]').forEach((radio) => {
+  radio.addEventListener("change", syncCoordinatorFields);
+});
 
 function setError(name, show) {
   const msg = form.querySelector(`[data-error-for="${name}"]`);
@@ -24,8 +45,11 @@ function setError(name, show) {
 
 function validate(data) {
   let firstInvalid = null;
+  const required = currentCategory() === "School"
+    ? [...BASE_REQUIRED, ...COORDINATOR_FIELDS]
+    : BASE_REQUIRED;
 
-  for (const name of REQUIRED) {
+  for (const name of required) {
     const value = (data.get(name) || "").trim();
     const invalid = value === "";
     setError(name, invalid);
@@ -80,6 +104,7 @@ form.addEventListener("submit", async (e) => {
     statusEl.textContent = `Registration received. We've logged "${payload.teamName}" for ${payload.institution}.`;
     statusEl.className = "success";
     form.reset();
+    syncCoordinatorFields();
   } catch (err) {
     statusEl.textContent = "Something went wrong sending your registration. Check your connection and try again.";
     statusEl.className = "error";

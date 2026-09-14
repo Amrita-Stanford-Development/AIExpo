@@ -127,16 +127,24 @@
           </div>
         </div>
 
-        <div class="member-row">
+        <div id="coordinator-fields" hidden>
           <div class="field">
-            <label for="coordEmail">Coordinator / teacher email</label>
-            <input type="email" id="coordEmail" name="coordEmail" required>
-            <p class="field-error" data-error-for="coordEmail" hidden>Enter a valid email.</p>
+            <label for="coordName">Coordinator / teacher name</label>
+            <input type="text" id="coordName" name="coordName">
+            <p class="field-error" data-error-for="coordName" hidden>Required.</p>
           </div>
-          <div class="field">
-            <label for="coordPhone">Coordinator / teacher phone</label>
-            <input type="tel" id="coordPhone" name="coordPhone" required>
-            <p class="field-error" data-error-for="coordPhone" hidden>Enter a valid phone number.</p>
+
+          <div class="member-row">
+            <div class="field">
+              <label for="coordEmail">Coordinator / teacher email</label>
+              <input type="email" id="coordEmail" name="coordEmail">
+              <p class="field-error" data-error-for="coordEmail" hidden>Enter a valid email.</p>
+            </div>
+            <div class="field">
+              <label for="coordPhone">Coordinator / teacher phone</label>
+              <input type="tel" id="coordPhone" name="coordPhone">
+              <p class="field-error" data-error-for="coordPhone" hidden>Enter a valid phone number.</p>
+            </div>
           </div>
         </div>
       </fieldset>
