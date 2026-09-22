@@ -16,13 +16,15 @@ const BASE_REQUIRED = [
 ];
 const COORDINATOR_FIELDS = ["coordName", "coordEmail", "coordPhone"];
 const GRADE_LABEL_IDS = ["m1grade-label", "m2grade-label", "m3grade-label"];
+const DEGREE_FIELDS = ["member1Degree", "member2Degree", "member3Degree"];
+const COLLEGE_REQUIRED_FIELDS = ["member1Degree"];
 
 function currentCategory() {
   return form.querySelector('input[name="category"]:checked')?.value || "";
 }
 
 // School teams need a coordinator on record and use "Grade"; college teams
-// register themselves and use "Year".
+// register themselves, use "Year", and also give a degree name.
 function syncCategoryFields() {
   const isSchool = currentCategory() === "School";
   coordinatorFields.hidden = !isSchool;
@@ -34,6 +36,13 @@ function syncCategoryFields() {
   }
   for (const id of GRADE_LABEL_IDS) {
     document.getElementById(id).textContent = isSchool ? "Grade" : "Year";
+  }
+  for (const name of DEGREE_FIELDS) {
+    document.getElementById(`${name}-field`).hidden = isSchool;
+    if (isSchool) {
+      form.querySelector(`[name="${name}"]`).value = "";
+      setError(name, false);
+    }
   }
 }
 
@@ -52,7 +61,7 @@ function validate(data) {
   let firstInvalid = null;
   const required = currentCategory() === "School"
     ? [...BASE_REQUIRED, ...COORDINATOR_FIELDS]
-    : BASE_REQUIRED;
+    : [...BASE_REQUIRED, ...COLLEGE_REQUIRED_FIELDS];
 
   for (const name of required) {
     const value = (data.get(name) || "").trim();

@@ -4,8 +4,9 @@
 
 const HEADERS = [
   "Timestamp", "Category", "Institution", "Team Name",
-  "Member 1 Name", "Member 1 Grade", "Member 2 Name", "Member 2 Grade",
-  "Member 3 Name", "Member 3 Grade",
+  "Member 1 Name", "Member 1 Grade", "Member 1 Degree",
+  "Member 2 Name", "Member 2 Grade", "Member 2 Degree",
+  "Member 3 Name", "Member 3 Grade", "Member 3 Degree",
   "Coordinator Name", "Coordinator Email", "Coordinator Phone",
   "Project Title", "Abstract", "Problem", "AI Tools", "Link",
 ];
@@ -26,10 +27,13 @@ function doPost(e) {
     data.teamName || "",
     data.member1Name || "",
     data.member1Grade || "",
+    data.member1Degree || "",
     data.member2Name || "",
     data.member2Grade || "",
+    data.member2Degree || "",
     data.member3Name || "",
     data.member3Grade || "",
+    data.member3Degree || "",
     data.coordName || "",
     data.coordEmail || "",
     data.coordPhone || "",
