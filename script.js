@@ -15,13 +15,15 @@ const BASE_REQUIRED = [
   "projectTitle", "abstract", "problem", "aiTools",
 ];
 const COORDINATOR_FIELDS = ["coordName", "coordEmail", "coordPhone"];
+const GRADE_LABEL_IDS = ["m1grade-label", "m2grade-label", "m3grade-label"];
 
 function currentCategory() {
   return form.querySelector('input[name="category"]:checked')?.value || "";
 }
 
-// School teams need a coordinator on record; college teams register themselves.
-function syncCoordinatorFields() {
+// School teams need a coordinator on record and use "Grade"; college teams
+// register themselves and use "Year".
+function syncCategoryFields() {
   const isSchool = currentCategory() === "School";
   coordinatorFields.hidden = !isSchool;
   if (!isSchool) {
@@ -30,10 +32,13 @@ function syncCoordinatorFields() {
       setError(name, false);
     }
   }
+  for (const id of GRADE_LABEL_IDS) {
+    document.getElementById(id).textContent = isSchool ? "Grade" : "Year";
+  }
 }
 
 form.querySelectorAll('input[name="category"]').forEach((radio) => {
-  radio.addEventListener("change", syncCoordinatorFields);
+  radio.addEventListener("change", syncCategoryFields);
 });
 
 function setError(name, show) {
@@ -104,7 +109,7 @@ form.addEventListener("submit", async (e) => {
     statusEl.textContent = `Registration received. We've logged "${payload.teamName}" for ${payload.institution}.`;
     statusEl.className = "success";
     form.reset();
-    syncCoordinatorFields();
+    syncCategoryFields();
   } catch (err) {
     statusEl.textContent = "Something went wrong sending your registration. Check your connection and try again.";
     statusEl.className = "error";
